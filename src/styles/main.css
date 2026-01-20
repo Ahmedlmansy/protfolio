@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@media (max-width : 1023px) and (min-width: 624px) {
+    /* 
+    1023 - 624 
+    */
+    .hero-section{
+        gap: 190px;
+    }
+}

@@ -4,12 +4,12 @@ import Footer from "../components/Footer";
 
 export default function MainLayout() {
   return (
-    <div>
+    <div className="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       <SectionHeader />
       <main>
         <Outlet />
       </main>
-    <Footer/>
-      </div>
+      <Footer />
+    </div>
   );
 }
