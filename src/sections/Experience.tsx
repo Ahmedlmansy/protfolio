@@ -81,7 +81,6 @@ export default function Experience() {
                       <span className="absolute inset-0 bg-blue-500 rounded-full animate-ping" />
                     )}
                   </motion.div>
-
                   {/* Card */}
                   <div
                     className={`flex-1 ml-12 md:ml-0 ${
