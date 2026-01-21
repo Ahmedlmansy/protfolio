@@ -58,7 +58,7 @@ export function About() {
                 className="w-40 h-40 rounded-full overflow-hidden border-2 border-slate-700 mb-6"
               >
                 <img
-                  src="/src/assets/images/profile.png"
+                  src="/assets/images/AM.png"
                   alt="Ahmed Mahmoud"
                   className="w-full h-full object-cover "
                 />

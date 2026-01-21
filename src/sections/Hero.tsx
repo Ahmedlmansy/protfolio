@@ -80,7 +80,7 @@ export default function Hero() {
                   className="border-2 border-blue-500/50 bg-transparent hover:bg-blue-600/10 text-white px-6 py-6 text-base font-semibold rounded-lg transition-all flex items-center gap-2"
                 >
                   <Download className="w-5 h-5" />
-                  <a href="/src/assets/files/Ahmed-Mahmoud-cv.pdf" download>
+                  <a href="/assets/files/Ahmed-Mahmoud-cv.pdf" download>
                     Download CV
                   </a>
                 </Button>
@@ -96,7 +96,7 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <img
-              src="/src/assets/images/AM.png"
+              src="/assets/images/AM.png"
               alt="Profile"
               className="w-full max-w-md"
             />
