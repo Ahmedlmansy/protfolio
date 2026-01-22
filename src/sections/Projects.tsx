@@ -33,7 +33,7 @@ const imageVariants: Variants = {
 
 export default function FeaturedProjects() {
   return (
-    <section className="min-h-screen py-12 md:py-20 px-4 sm:px-6 lg:px-8">
+    <section className="min-h-screen py-12 md:py-20 px-4 sm:px-6 lg:px-8" id="projects">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div

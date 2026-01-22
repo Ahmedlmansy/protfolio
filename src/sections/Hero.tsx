@@ -66,8 +66,9 @@ export default function Hero() {
                 <Button
                   variant="outline"
                   className="border-2 border-blue-500/50 bg-transparent hover:bg-blue-600/10 text-white px-8 py-6 text-base font-semibold rounded-lg transition-all"
+                  asChild
                 >
-                  <a href="#project"> View Projects</a>
+                  <a href="#projects"> View Projects</a>
                 </Button>
               </motion.div>
 
