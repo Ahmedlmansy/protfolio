@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import SectionHeader from "../components/SectionHeader";
 import Footer from "../components/Footer";
+import { Toaster } from "sonner";
 
 export default function MainLayout() {
   return (
@@ -8,6 +9,7 @@ export default function MainLayout() {
       <SectionHeader />
       <main>
         <Outlet />
+        <Toaster position="top-left" />
       </main>
       <Footer />
     </div>
