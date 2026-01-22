@@ -137,23 +137,28 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
               }}
               className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 transition-all group cursor-pointer"
             >
-              <div className="flex items-center gap-4">
-                <motion.div
-                  whileHover={{ y: [0, -5, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                  className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:bg-blue-600/30 transition-colors"
-                >
-                  <FileDown className="w-6 h-6 text-blue-400" />
-                </motion.div>
-                <div className="flex-1">
-                  <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">
-                    CV
-                  </p>
-                  <p className="text-white font-medium group-hover:text-blue-400 transition-colors">
-                    Download CV ↓
-                  </p>
+              <a
+                href="/assets/files/Ahmed-Mahmoud-cv.pdf"
+                download="Ahmed-Mahmoud-CV.pdf"
+              >
+                <div className="flex items-center gap-4">
+                  <motion.div
+                    whileHover={{ y: [0, -5, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:bg-blue-600/30 transition-colors"
+                  >
+                    <FileDown className="w-6 h-6 text-blue-400" />
+                  </motion.div>
+                  <div className="flex-1">
+                    <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">
+                      CV
+                    </p>
+                    <p className="text-white font-medium group-hover:text-blue-400 transition-colors">
+                      Download CV ↓
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </a>
             </motion.div>
 
             {/* Social Links */}
