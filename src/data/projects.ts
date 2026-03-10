@@ -13,7 +13,7 @@ export const projects = [
       { name: "Framer Motion", color: "#E91E63" },
       { name: "Hero UI", color: "#000000" },
     ],
-    mainImage: "https://696f7b7876634d918b86f661.imgix.net/HomeEduMaster.png",
+    mainImage: "https://i.postimg.cc/MKSC5ZBQ/Home_Edu_Master.png",
     overview: {
       challenge:
         "The primary challenge was building a flexible exam management system that supports multiple question types while maintaining high performance.",
@@ -23,9 +23,18 @@ export const projects = [
         "Focused on a user-centric design for the admin dashboard to simplify complex tasks like exam creation and question organization.",
     },
     gallery: [
-      { title: "Admin Add Questions", image: "https://696f7b7876634d918b86f661.imgix.net/AdminAddQ.png" },
-      { title: "All Questions", image: "https://696f7b7876634d918b86f661.imgix.net/AllQu.png" },
-      { title: "Register and Login ", image: "https://696f7b7876634d918b86f661.imgix.net/RegisterEdu.png" },
+      {
+        title: "Admin Add Questions",
+        image: "https://i.postimg.cc/T1rZxFzK/Add-Ques.png",
+      },
+      {
+        title: "All Questions",
+        image: "https://i.postimg.cc/qq89rSPz/All-Qun2.png",
+      },
+      {
+        title: "Register and Login ",
+        image: "https://i.postimg.cc/5NVhg9z3/Register_Edu.png",
+      },
     ],
     features: [
       {
@@ -62,7 +71,7 @@ export const projects = [
       { name: "Redux Toolkit", color: "#764ABC" },
       { name: "Supabase", color: "#3ECF8E" },
     ],
-    mainImage: "https://696f7b7876634d918b86f661.imgix.net/rawaahMain.png",
+    mainImage: "https://i.postimg.cc/9Fz7x97r/Home_Rawaah.png",
     overview: {
       challenge:
         "Building a scalable e-commerce architecture that handles product discovery, filtering, and secure checkout flows efficiently.",
@@ -72,20 +81,37 @@ export const projects = [
         "Adopted a mobile-first approach to ensure a seamless shopping experience across all devices.",
     },
     gallery: [
-      { title: "Dashboard Rawaah", image: "https://696f7b7876634d918b86f661.imgix.net/dashboradR.png" },
-      { title: "Product Management", image: "https://696f7b7876634d918b86f661.imgix.net/productManagemant.png" },
-      { title: "Order Management", image: "https://696f7b7876634d918b86f661.imgix.net/orderManagement.png" },
-      { title: "Login page", image: "https://696f7b7876634d918b86f661.imgix.net/rawaah.png" },
-      { title: "Product Details", image: "https://696f7b7876634d918b86f661.imgix.net/productDetails.png" },
+      {
+        title: "Dashboard Rawaah",
+        image: "https://i.postimg.cc/nV3mY2MW/Rawaah_Dash.png",
+      },
+      {
+        title: "Product Management",
+        image: "https://i.postimg.cc/TwGbQHVv/products_Ma_Rawaah.png",
+      },
+      {
+        title: "Order Management",
+        image: "https://i.postimg.cc/YSQg6wW7/orders_Rawaah.png",
+      },
+      {
+        title: "Login page",
+        image: "https://i.postimg.cc/nc5QNLKp/login_Page.png",
+      },
+      {
+        title: "Product Details",
+        image: "https://i.postimg.cc/tTy6Dm3g/Products_Details.png",
+      },
     ],
     features: [
       {
         title: "Product Discovery",
-        description: "Advanced filtering and search for finding perfumes easily.",
+        description:
+          "Advanced filtering and search for finding perfumes easily.",
       },
       {
         title: "Admin Dashboard",
-        description: "Role-based access control for managing products and orders.",
+        description:
+          "Role-based access control for managing products and orders.",
       },
       {
         title: "Secure Checkout",
@@ -113,7 +139,7 @@ export const projects = [
       { name: "Firebase", color: "#FFCA28" },
       { name: "Mapbox GL", color: "#4264FB" },
     ],
-    mainImage: "https://696f7b7876634d918b86f661.imgix.net/mainBayan.png",
+    mainImage: "https://i.postimg.cc/kMbfgDs6/Main_Bayan.png",
     overview: {
       challenge:
         "Visualizing complex datasets in real-time while supporting both Arabic and English languages with RTL/LTR layouts.",
@@ -123,18 +149,29 @@ export const projects = [
         "Designed a modular dashboard architecture that allows for easy integration of new data sources and visualization types.",
     },
     gallery: [
-      { title: "Finance Dashboard", image: "https://696f7b7876634d918b86f661.imgix.net/Finance.png" },
-      { title: "CRM Dashboard", image: "https://696f7b7876634d918b86f661.imgix.net/CRM.png" },
-      { title: "Login Page", image: "https://696f7b7876634d918b86f661.imgix.net/loginBayan.png" },
+      {
+        title: "Finance Dashboard",
+        image: "https://i.postimg.cc/nVD0hM24/Finance_Bayan.png",
+      },
+      {
+        title: "CRM Dashboard",
+        image: "https://i.postimg.cc/h4dpths7/CRM.png",
+      },
+      {
+        title: "Login Page",
+        image: "https://i.postimg.cc/DfXBwm6C/login_Bayan.png",
+      },
     ],
     features: [
       {
         title: "Multi-language",
-        description: "Full support for Arabic and English with RTL/LTR layouts.",
+        description:
+          "Full support for Arabic and English with RTL/LTR layouts.",
       },
       {
         title: "Data Visualization",
-        description: "Interactive charts and geographic maps for data insights.",
+        description:
+          "Interactive charts and geographic maps for data insights.",
       },
       {
         title: "Real-time Analytics",
@@ -162,7 +199,7 @@ export const projects = [
       { name: "Axios", color: "#5A29E4" },
       { name: "Tailwind CSS", color: "#38B2AC" },
     ],
-    mainImage: "https://696f7b7876634d918b86f661.imgix.net/mainBasket.png",
+    mainImage: "https://i.postimg.cc/x8fv5Trf/main_Ec.png",
     overview: {
       challenge:
         "Creating a fast and responsive product catalog that integrates smoothly with REST APIs.",
@@ -172,9 +209,18 @@ export const projects = [
         "Focused on clean UI components and intuitive navigation to enhance the shopping experience.",
     },
     gallery: [
-      { title: "Shop Page", image: "https://696f7b7876634d918b86f661.imgix.net/shopPage.png" },
-      { title: "Product Details", image: "https://696f7b7876634d918b86f661.imgix.net/productDetailsBas.png" },
-      { title: "Filter Options", image: "https://696f7b7876634d918b86f661.imgix.net/filterBas.png" },
+      {
+        title: "Shop Page",
+        image: "https://i.postimg.cc/ZqNxKMPg/shop.png",
+      },
+      {
+        title: "Product Details",
+        image: "https://i.postimg.cc/TY20qQGS/prod_Det.png",
+      },
+      {
+        title: "Filter Options",
+        image: "https://i.postimg.cc/XqL86BKx/filter_Op.png",
+      },
     ],
     features: [
       {
@@ -211,7 +257,7 @@ export const projects = [
       { name: "Axios", color: "#5A29E4" },
       { name: "React Router", color: "#CA4245" },
     ],
-    mainImage: "https://696f7b7876634d918b86f661.imgix.net/mainSi.png",
+    mainImage: "https://i.postimg.cc/Gmf11Hqr/Main_Simply.png",
     overview: {
       challenge:
         "Migrating a legacy static site to a modern React framework while improving accessibility and performance.",
@@ -221,10 +267,22 @@ export const projects = [
         "Prioritized developer experience with Vite and user experience with client-side routing.",
     },
     gallery: [
-      { title: "Dish Type", image: "https://696f7b7876634d918b86f661.imgix.net/dishType.png" },
-      { title: "Tags Page", image: "https://696f7b7876634d918b86f661.imgix.net/tagsPage.png" },
-      { title: "Contact Page", image: "https://696f7b7876634d918b86f661.imgix.net/contactSi.png" },
-      { title: "Saved Recipes", image: "https://696f7b7876634d918b86f661.imgix.net/savedRecipes.png" },
+      {
+        title: "Dish Type",
+        image: "https://i.postimg.cc/cLnFrCdJ/dish_Type.png",
+      },
+      {
+        title: "Tags Page",
+        image: "https://i.postimg.cc/7YcBH08z/tags.png",
+      },
+      {
+        title: "Contact Page",
+        image: "https://i.postimg.cc/zGv1MnwR/contact.png",
+      },
+      {
+        title: "Saved Recipes",
+        image: "https://i.postimg.cc/13XZTp0K/saved.png",
+      },
     ],
     features: [
       {

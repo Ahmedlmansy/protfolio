@@ -31,7 +31,10 @@ const imageBoxVariants: Variants = {
 
 export function About() {
   return (
-    <section className="min-h-screen py-12 md:py-20 px-4 sm:px-6 lg:px-8" id="about">
+    <section
+      className="min-h-screen py-12 md:py-20 px-4 sm:px-6 lg:px-8"
+      id="about"
+    >
       <motion.div
         className="max-w-7xl mx-auto"
         variants={containerVariants}
@@ -58,7 +61,7 @@ export function About() {
                 className="w-40 h-40 rounded-full overflow-hidden border-2 border-slate-700 mb-6"
               >
                 <img
-                  src="/assets/images/AM.png"
+                  src="/assets/images/AM-3.jpeg"
                   alt="Ahmed Mahmoud"
                   className="w-full h-full object-cover "
                 />
