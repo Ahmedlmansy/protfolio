@@ -1,5 +1,76 @@
 export const projects = [
   {
+    title: "Digital Archive",
+    category: "Web Applications",
+    version: "v1.0",
+    tags: ["Frontend", "AI"],
+    description:
+      "An AI-powered digital archiving system used by faculty members and students to manage and digitize academic documents, featuring OCR text extraction and AI-powered summarization. Awarded Best Graduation Project of the Year.",
+    technologies: [
+      { name: "React", color: "#61DAFB" },
+      { name: "Supabase", color: "#3ECF8E" },
+      { name: "Redux", color: "#764ABC" },
+      { name: "Grok AI", color: "#000000" },
+      { name: "OCR", color: "#F59E0B" },
+    ],
+    mainImage:
+      "https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/MainAR.png",
+    overview: {
+      challenge:
+        "Faculty members and students needed a reliable way to digitize, organize, and quickly understand large volumes of academic documents without manual data entry.",
+      solution:
+        "Integrated OCR technology to automatically extract text from scanned documents and built AI-powered summarization so users can grasp a document's content in seconds instead of reading full pages.",
+      approach:
+        "Led frontend development with a bilingual Arabic/English interface and full RTL support, focusing on an intuitive document management experience for both faculty and students.",
+    },
+    gallery: [
+      {
+        title: "Dashboard",
+        image:
+          "https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/dashAR.png",
+      },
+      {
+        title: "Add Documents",
+        image:
+          "https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/AddAr.png",
+      },
+      {
+        title: "User Management",
+        image:
+          "https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/UsersAR.png",
+      },
+      {
+        title: "Document Preview",
+        image:
+          "https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/ShowAR.jpeg",
+      },
+    ],
+    features: [
+      {
+        title: "OCR Text Extraction",
+        description:
+          "Automatically extracts text from scanned documents, removing the need for manual data entry.",
+      },
+      {
+        title: "AI Document Summarization",
+        description:
+          "AI-powered summarization lets users grasp a document's content in seconds instead of reading full pages.",
+      },
+      {
+        title: "Bilingual RTL Interface",
+        description:
+          "Full Arabic/English interface with complete RTL support for document management.",
+      },
+      {
+        title: "Award-Winning Project",
+        description:
+          "Recognized as Best Graduation Project of the Year by the department faculty.",
+      },
+    ],
+    liveDemo: "https://digital-archive-theta-taupe.vercel.app/",
+    sourceCode: "https://github.com/Ahmedlmansy/digital-archive",
+  },
+  {
     title: "Edu Master",
     category: "Web Applications",
     version: "v2.0",

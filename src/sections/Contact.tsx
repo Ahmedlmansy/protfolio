@@ -138,8 +138,8 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
               className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 transition-all group cursor-pointer"
             >
               <a
-                href="/assets/files/Ahmed-Mahmoud-cv.pdf"
-                download="Ahmed-Mahmoud-CV.pdf"
+                href="https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/Ahmed-Mahmoud.pdf"
+                download="https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/Ahmed-Mahmoud.pdf"
               >
                 <div className="flex items-center gap-4">
                   <motion.div
