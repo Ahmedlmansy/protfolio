@@ -1,270 +1,239 @@
-import { useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Mail, FileDown, Github, Linkedin, Send } from "lucide-react";
+import type { FormEvent } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  FileDown,
+  Github,
+  Linkedin,
+  Mail,
+  Send,
+} from "lucide-react";
 import { toast } from "sonner";
-import { motion, type Variants } from "framer-motion";
-// Contact Data
-const contactData = {
-  title: "Let's work together",
-  description:
-    "I'm currently available for freelance work or full-time opportunities. If you have a project that needs some creative touch, let's chat.",
-  email: "ahmedelmansy579@gmail.com",
-  social: [
-    { name: "GitHub", icon: Github, url: "https://github.com/Ahmedlmansy" },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      url: "https://www.linkedin.com/in/ahmed-mahmoud-0b165a255/",
-    },
-  ],
-};
+import { site } from "@/data/site";
+import { socials } from "@/data/socials";
+import { sectionViewport, useMotionPresets } from "@/lib/motion";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Please enter at least 2 characters.").max(100, "Name is too long."),
+  email: z.string().trim().email("Enter a valid email address.").max(254, "Email address is too long."),
+  message: z.string().trim().min(10, "Please add a little more detail (at least 10 characters).").max(5000, "Message is too long."),
+});
+
+type ContactFields = z.infer<typeof contactSchema>;
+
+const fieldClass =
+  "w-full rounded-lg border border-border bg-surface-low px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/20";
+
+const socialIcons = {
+  GitHub: Github,
+  LinkedIn: Linkedin,
+} as const;
 
 export default function Contact() {
+  const motionPresets = useMotionPresets();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFields>();
 
-const form = useRef<HTMLFormElement | null>(null);
-
-const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-
-  if (!form.current) return;
-
-  emailjs
-    .sendForm(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      form.current!,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-    )
-    .then(
-      () => {
-        toast.success("Email sent successfully!");
-        form.current?.reset();
-      },
-      (error) => {
-        toast.error(`Failed to send email: ${error.text}`);
-      },
-    );
+  const submitEmail = async (submittedForm: HTMLFormElement) => {
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        submittedForm,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
+      toast.success("Email sent successfully!");
+      reset();
+    } catch (error) {
+      const errorMessage =
+        error && typeof error === "object" && "text" in error && typeof error.text === "string"
+          ? error.text
+          : error instanceof Error
+            ? error.message
+            : "Please try again.";
+      toast.error(`Failed to send email: ${errorMessage}`);
+    }
   };
-    const containerVariants: Variants = {
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: {
-          staggerChildren: 0.2,
-        },
-      },
-    };
 
-    const itemVariants: Variants = {
-      hidden: { y: 20, opacity: 0 },
-      visible: {
-        y: 0,
-        opacity: 1,
-        transition: { duration: 0.6, ease: "easeOut" },
-      },
-    };
+  const nameField = register("name", {
+    validate: (value) => contactSchema.shape.name.safeParse(value).success || "Please enter a name between 2 and 100 characters.",
+  });
+  const emailField = register("email", {
+    validate: (value) => contactSchema.shape.email.safeParse(value).success || "Enter a valid email address.",
+  });
+  const messageField = register("message", {
+    validate: (value) => contactSchema.shape.message.safeParse(value).success || "Message must be between 10 and 5000 characters.",
+  });
+  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const submittedForm = event.currentTarget;
+    void handleSubmit(() => submitEmail(submittedForm))(event);
+  };
 
-    const formVariants: Variants = {
-      hidden: { x: 50, opacity: 0 },
-      visible: {
-        x: 0,
-        opacity: 1,
-        transition: { duration: 0.8, ease: "easeOut" },
-      },
-    };
   return (
-    <section
-      className="min-h-screen py-12 md:py-20 px-4 sm:px-6 lg:px-8"
-      id="contact"
-    >
+    <section id="contact" className="section-wrap">
       <motion.div
-        className="max-w-6xl mx-auto"
-        variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={sectionViewport}
+        variants={motionPresets.staggerContainer}
+        className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-surface-low via-surface-container to-surface-lowest p-5 shadow-2xl shadow-black/20 sm:p-8 lg:p-10"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left Side - Contact Info */}
-          <div className="space-y-8">
-            {/* Title & Description */}
-            <motion.div variants={itemVariants}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-                {contactData.title}
-              </h2>
-              <p className="text-gray-400 text-base md:text-lg leading-relaxed">
-                {contactData.description}
-              </p>
-            </motion.div>
-
-            {/* Email Card */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{
-                scale: 1.02,
-                borderColor: "rgba(59, 130, 246, 0.5)",
-              }}
-              className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 transition-all group"
+        <div className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-primary/10 blur-3xl" />
+        <div className="relative z-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+          <motion.div variants={motionPresets.staggerContainer} className="flex flex-col items-start lg:col-span-5">
+            <motion.span
+              variants={motionPresets.staggerItem}
+              className="inline-flex items-center gap-2 rounded-full border border-tertiary/20 bg-tertiary/10 px-3 py-1.5 font-mono text-[0.58rem] uppercase tracking-wider text-tertiary"
             >
-              <div className="flex items-center gap-4">
-                <motion.div
-                  whileHover={{ rotate: 15 }}
-                  className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:bg-blue-600/30 transition-colors"
-                >
-                  <Mail className="w-6 h-6 text-blue-400" />
-                </motion.div>
-                <div className="flex-1">
-                  <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">
-                    Email
-                  </p>
-                  <a
-                    href={`mailto:${contactData.email}`}
-                    className="text-white font-medium hover:text-blue-400 transition-colors"
-                  >
-                    {contactData.email}
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* CV Download Card */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{
-                scale: 1.02,
-                borderColor: "rgba(59, 130, 246, 0.5)",
-              }}
-              className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 transition-all group cursor-pointer"
+              <span className="size-1.5 rounded-full bg-tertiary" />
+              Available for opportunities
+            </motion.span>
+            <motion.p variants={motionPresets.staggerItem} className="eyebrow mt-7">
+              Have a project in mind?
+            </motion.p>
+            <motion.h2
+              variants={motionPresets.staggerItem}
+              className="mt-3 font-display text-3xl font-semibold leading-tight tracking-[-0.035em] text-foreground sm:text-4xl"
             >
-              <a
-                href="https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/Ahmed-Mahmoud.pdf"
-                download="https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/Ahmed-Mahmoud.pdf"
-              >
-                <div className="flex items-center gap-4">
-                  <motion.div
-                    whileHover={{ y: [0, -5, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                    className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:bg-blue-600/30 transition-colors"
-                  >
-                    <FileDown className="w-6 h-6 text-blue-400" />
-                  </motion.div>
-                  <div className="flex-1">
-                    <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">
-                      CV
-                    </p>
-                    <p className="text-white font-medium group-hover:text-blue-400 transition-colors">
-                      Download CV ↓
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </motion.div>
+              {site.contactHeading}
+            </motion.h2>
+            <motion.p variants={motionPresets.staggerItem} className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
+              {site.contactPrompt}
+            </motion.p>
 
-            {/* Social Links */}
-            <motion.div variants={itemVariants}>
-              <p className="text-gray-400 text-sm mb-4">Connect with me</p>
-              <div className="flex gap-4">
-                {contactData.social.map((social, index: number) => {
-                  const Icon = social.icon;
+            <motion.a
+              variants={motionPresets.staggerItem}
+              href={`mailto:${site.email}`}
+              className="mt-7 inline-flex max-w-full items-center gap-3 rounded-xl border border-border bg-surface-lowest px-4 py-3 transition-colors hover:border-primary/30"
+            >
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary-light">
+                <Mail size={18} aria-hidden="true" />
+              </span>
+              <span className="min-w-0">
+                <span className="block font-mono text-[0.58rem] uppercase tracking-wider text-muted-foreground">Email me</span>
+                <span className="block truncate text-sm font-medium text-foreground">{site.email}</span>
+              </span>
+              <ArrowUpRight size={16} className="shrink-0 text-muted-foreground" aria-hidden="true" />
+            </motion.a>
+
+            <motion.a
+              variants={motionPresets.staggerItem}
+              href={site.cvUrl}
+              download
+              className="mt-3 inline-flex items-center gap-2 rounded-lg px-1 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <FileDown size={16} aria-hidden="true" />
+              Download CV
+            </motion.a>
+
+            <motion.div variants={motionPresets.staggerItem} className="mt-7 flex items-center gap-3">
+              <span className="font-mono text-[0.58rem] uppercase tracking-wider text-muted-foreground">Connect</span>
+              <span className="h-px w-8 bg-border" />
+              {socials
+                .filter(({ name }) => name in socialIcons)
+                .map(({ name, href }) => {
+                  const Icon = socialIcons[name as keyof typeof socialIcons];
                   return (
                     <motion.a
-                      key={index}
-                      href={social.url}
-                      whileHover={{ y: -5, scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-12 h-12 bg-slate-900/50 border border-slate-800 rounded-lg flex items-center justify-center hover:border-blue-500 hover:bg-blue-600/10 transition-all group"
-                      aria-label={social.name}
+                      key={name}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={name}
+                      whileHover={motionPresets.hoverLift}
+                      className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-surface-low text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      <Icon className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+                      <Icon size={16} aria-hidden="true" />
                     </motion.a>
                   );
                 })}
-              </div>
             </motion.div>
-          </div>
+          </motion.div>
 
-          {/* Right Side - Contact Form */}
           <motion.div
-            variants={formVariants}
-            className="bg-gradient-to-b from-slate-900/50 to-slate-800/30 border border-slate-700/50 rounded-2xl p-6 md:p-8 shadow-2xl"
+            variants={motionPresets.staggerItem}
+            className="rounded-xl border border-border bg-surface-lowest/90 p-5 shadow-lg sm:p-7 lg:col-span-7"
           >
-            <form ref={form} onSubmit={sendEmail}>
-              <div className="space-y-6">
-                {/* hidden fields */}
-                <input
-                  type="hidden"
-                  name="title"
-                  value="Portfolio Contact Form"
-                />
-                <input
-                  type="hidden"
-                  name="time"
-                  value={new Date().toLocaleString()}
-                />
-
-                {/* Name */}
-                <motion.div variants={itemVariants}>
-                  <label className="block text-white text-sm font-medium mb-2">
+            <div className="mb-6">
+              <p className="eyebrow mb-2">Send a message</p>
+              <h3 className="font-display text-xl font-semibold text-foreground">Start a conversation</h3>
+            </div>
+            <form onSubmit={onFormSubmit} noValidate>
+              <input type="hidden" name="title" value="Portfolio Contact Form" />
+              <input type="hidden" name="time" value={new Date().toLocaleString()} />
+              <motion.div variants={motionPresets.staggerContainer} className="space-y-5">
+                <motion.div variants={motionPresets.staggerItem}>
+                  <label htmlFor="contact-name" className="mb-2 block font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">
                     Name
                   </label>
                   <input
+                    {...nameField}
+                    id="contact-name"
                     type="text"
-                    name="name"
+                    autoComplete="name"
                     required
-                    className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
                     placeholder="Your name"
+                    className={fieldClass}
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? "contact-name-error" : undefined}
                   />
+                  {errors.name && <p id="contact-name-error" role="alert" className="mt-1.5 text-xs text-destructive">{errors.name.message}</p>}
                 </motion.div>
 
-                {/* Email */}
-                <motion.div variants={itemVariants}>
-                  <label className="block text-white text-sm font-medium mb-2">
+                <motion.div variants={motionPresets.staggerItem}>
+                  <label htmlFor="contact-email" className="mb-2 block font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">
                     Email
                   </label>
                   <input
+                    {...emailField}
+                    id="contact-email"
                     type="email"
-                    name="email"
+                    autoComplete="email"
                     required
-                    className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
-                    placeholder="your.email@example.com"
+                    placeholder="you@example.com"
+                    className={fieldClass}
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? "contact-email-error" : undefined}
                   />
+                  {errors.email && <p id="contact-email-error" role="alert" className="mt-1.5 text-xs text-destructive">{errors.email.message}</p>}
                 </motion.div>
 
-                {/* Message */}
-                <motion.div variants={itemVariants}>
-                  <label className="block text-white text-sm font-medium mb-2">
+                <motion.div variants={motionPresets.staggerItem}>
+                  <label htmlFor="contact-message" className="mb-2 block font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">
                     Message
                   </label>
                   <textarea
-                    name="message"
-                    rows={6}
+                    {...messageField}
+                    id="contact-message"
+                    rows={5}
                     required
-                    className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-lg text-white resize-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
                     placeholder="Tell me about your project..."
+                    className={`${fieldClass} min-h-32 resize-y`}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? "contact-message-error" : undefined}
                   />
+                  {errors.message && <p id="contact-message-error" role="alert" className="mt-1.5 text-xs text-destructive">{errors.message.message}</p>}
                 </motion.div>
 
-                {/* Submit */}
-                <motion.div
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  variants={motionPresets.staggerItem}
+                  whileHover={motionPresets.reduceMotion || isSubmitting ? undefined : { y: -2 }}
+                  whileTap={motionPresets.tapPress}
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-primary)] transition-colors hover:bg-primary-light disabled:cursor-wait disabled:opacity-70"
                 >
-                  <Button
-                    type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20"
-                  >
-                    <motion.div
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ repeat: Infinity, duration: 2 }}
-                    >
-                      <Send className="w-5 h-5" />
-                    </motion.div>
-                    Send Message
-                  </Button>
-                </motion.div>
-              </div>
+                  {isSubmitting ? "Sending..." : "Send message"}
+                  <Send size={16} aria-hidden="true" />
+                </motion.button>
+              </motion.div>
             </form>
           </motion.div>
         </div>

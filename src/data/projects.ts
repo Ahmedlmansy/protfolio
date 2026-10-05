@@ -1,9 +1,38 @@
-export const projects = [
+export type Project = {
+  id: string;
+  slug: string;
+  title: string;
+  category: string;
+  version: string;
+  tags: string[];
+  shortDescription: string;
+  description: string;
+  role: string;
+  contribution: string;
+  featured: boolean;
+  technologies: { name: string; color: string }[];
+  image: string;
+  overview: {
+    challenge: string;
+    solution: string;
+    approach: string;
+  };
+  gallery: { title: string; image: string }[];
+  features: { title: string; description: string }[];
+  live: string;
+  github: string;
+};
+
+export const projects: Project[] = [
   {
+    id: "digital-archive",
+    slug: "digital-archive",
     title: "Digital Archive",
     category: "Web Applications",
     version: "v1.0",
     tags: ["Frontend", "AI"],
+    shortDescription:
+      "An AI-assisted archive for digitizing, organizing, and understanding academic documents.",
     description:
       "An AI-powered digital archiving system used by faculty members and students to manage and digitize academic documents, featuring OCR text extraction and AI-powered summarization. Awarded Best Graduation Project of the Year.",
     technologies: [
@@ -13,7 +42,11 @@ export const projects = [
       { name: "Grok AI", color: "#000000" },
       { name: "OCR", color: "#F59E0B" },
     ],
-    mainImage:
+    role: "Frontend lead",
+    contribution:
+      "Led frontend development with a bilingual Arabic/English interface and full RTL support.",
+    featured: true,
+    image:
       "https://kl5zxw2bu85pkkao.public.blob.vercel-storage.com/MainAR.png",
     overview: {
       challenge:
@@ -67,14 +100,18 @@ export const projects = [
           "Recognized as Best Graduation Project of the Year by the department faculty.",
       },
     ],
-    liveDemo: "https://digital-archive-theta-taupe.vercel.app/",
-    sourceCode: "https://github.com/Ahmedlmansy/digital-archive",
+    live: "https://digital-archive-theta-taupe.vercel.app/",
+    github: "https://github.com/Ahmedlmansy/digital-archive",
   },
   {
+    id: "edu-master",
+    slug: "edu-master",
     title: "Edu Master",
     category: "Web Applications",
     version: "v2.0",
     tags: ["Frontend"],
+    shortDescription:
+      "An educational platform with an admin dashboard for creating exams and managing questions.",
     description:
       "An educational platform with a powerful admin dashboard, featuring exam question management and a smooth user experience for exam creation.",
     technologies: [
@@ -84,7 +121,11 @@ export const projects = [
       { name: "Framer Motion", color: "#E91E63" },
       { name: "Hero UI", color: "#000000" },
     ],
-    mainImage: "https://i.postimg.cc/MKSC5ZBQ/Home_Edu_Master.png",
+    role: "Frontend development",
+    contribution:
+      "Built modular exam and question-management workflows with an interactive admin experience.",
+    featured: true,
+    image: "https://i.postimg.cc/MKSC5ZBQ/Home_Edu_Master.png",
     overview: {
       challenge:
         "The primary challenge was building a flexible exam management system that supports multiple question types while maintaining high performance.",
@@ -125,14 +166,18 @@ export const projects = [
         description: "Smooth user experience powered by Framer Motion.",
       },
     ],
-    liveDemo: "https://edumaster-mu.vercel.app/",
-    sourceCode: "https://github.com/Ahmedlmansy/edumaster",
+    live: "https://edumaster-mu.vercel.app/",
+    github: "https://github.com/Ahmedlmansy/edumaster",
   },
   {
+    id: "rawaah-perfumes",
+    slug: "rawaah-perfumes",
     title: "Rawaah Perfumes",
     category: "E-commerce",
     version: "v1.0",
     tags: ["Fullstack"],
+    shortDescription:
+      "A perfume storefront and admin platform for product discovery, orders, and inventory.",
     description:
       "A full-featured e-commerce platform for perfumes, featuring product discovery, advanced filtering, and a secure admin dashboard.",
     technologies: [
@@ -142,7 +187,11 @@ export const projects = [
       { name: "Redux Toolkit", color: "#764ABC" },
       { name: "Supabase", color: "#3ECF8E" },
     ],
-    mainImage: "https://i.postimg.cc/9Fz7x97r/Home_Rawaah.png",
+    role: "Full-stack development",
+    contribution:
+      "Built a mobile-first storefront and connected product, order, and account workflows.",
+    featured: true,
+    image: "https://i.postimg.cc/9Fz7x97r/Home_Rawaah.png",
     overview: {
       challenge:
         "Building a scalable e-commerce architecture that handles product discovery, filtering, and secure checkout flows efficiently.",
@@ -193,14 +242,18 @@ export const projects = [
         description: "Powered by Supabase for reliable data management.",
       },
     ],
-    liveDemo: "https://rawaah-perfumes-dj1d.vercel.app/",
-    sourceCode: "https://github.com/Ahmedlmansy/Rawaah_perfumes",
+    live: "https://rawaah-perfumes-dj1d.vercel.app/",
+    github: "https://github.com/Ahmedlmansy/Rawaah_perfumes",
   },
   {
+    id: "bayan-dashboard",
+    slug: "bayan-dashboard",
     title: "Bayan Dashboard",
     category: "Web Applications",
     version: "v1.0",
     tags: ["Frontend", "Analytics"],
+    shortDescription:
+      "A multilingual analytics dashboard with real-time visualizations and geographic data.",
     description:
       "A comprehensive analytics dashboard with multi-language support, real-time data visualization, and geographic mapping.",
     technologies: [
@@ -210,7 +263,11 @@ export const projects = [
       { name: "Firebase", color: "#FFCA28" },
       { name: "Mapbox GL", color: "#4264FB" },
     ],
-    mainImage: "https://i.postimg.cc/kMbfgDs6/Main_Bayan.png",
+    role: "Frontend development",
+    contribution:
+      "Developed a modular dashboard with Arabic/English localization and RTL/LTR layouts.",
+    featured: false,
+    image: "https://i.postimg.cc/kMbfgDs6/Main_Bayan.png",
     overview: {
       challenge:
         "Visualizing complex datasets in real-time while supporting both Arabic and English languages with RTL/LTR layouts.",
@@ -253,14 +310,18 @@ export const projects = [
         description: "Integrated system for managing and organizing files.",
       },
     ],
-    liveDemo: "https://bayan-self.vercel.app",
-    sourceCode: "https://github.com/Ahmedlmansy/Bayan",
+    live: "https://bayan-self.vercel.app",
+    github: "https://github.com/Ahmedlmansy/Bayan",
   },
   {
+    id: "basket-ecommerce",
+    slug: "basket-ecommerce",
     title: "Basket Ecommerce",
     category: "E-commerce",
     version: "v1.0",
     tags: ["Frontend"],
+    shortDescription:
+      "A responsive shopping experience focused on product browsing, filtering, and API data.",
     description:
       "A modern e-commerce application focused on product listing, filtering, and a seamless user experience.",
     technologies: [
@@ -270,7 +331,11 @@ export const projects = [
       { name: "Axios", color: "#5A29E4" },
       { name: "Tailwind CSS", color: "#38B2AC" },
     ],
-    mainImage: "https://i.postimg.cc/x8fv5Trf/main_Ec.png",
+    role: "Frontend development",
+    contribution:
+      "Built product listing, filtering, and product-detail flows around REST API data.",
+    featured: false,
+    image: "https://i.postimg.cc/x8fv5Trf/main_Ec.png",
     overview: {
       challenge:
         "Creating a fast and responsive product catalog that integrates smoothly with REST APIs.",
@@ -311,14 +376,18 @@ export const projects = [
         description: "Built with Vite for lightning-fast load times.",
       },
     ],
-    liveDemo: "https://basket-ecommerce-iota.vercel.app/",
-    sourceCode: "https://github.com/Ahmedlmansy/basket-ecommerce",
+    live: "https://basket-ecommerce-iota.vercel.app/",
+    github: "https://github.com/Ahmedlmansy/basket-ecommerce",
   },
   {
+    id: "simply-recipes",
+    slug: "simply-recipes",
     title: "Simply Recipes",
     category: "Web Applications",
     version: "v1.0",
     tags: ["Frontend"],
+    shortDescription:
+      "A recipe discovery app with dynamic API content and client-side navigation.",
     description:
       "A dynamic recipe application converted from static HTML to a modern React architecture with real-time API integration.",
     technologies: [
@@ -328,7 +397,11 @@ export const projects = [
       { name: "Axios", color: "#5A29E4" },
       { name: "React Router", color: "#CA4245" },
     ],
-    mainImage: "https://i.postimg.cc/Gmf11Hqr/Main_Simply.png",
+    role: "Frontend development",
+    contribution:
+      "Refactored the application into reusable React components and integrated API-driven content.",
+    featured: false,
+    image: "https://i.postimg.cc/Gmf11Hqr/Main_Simply.png",
     overview: {
       challenge:
         "Migrating a legacy static site to a modern React framework while improving accessibility and performance.",
@@ -373,7 +446,7 @@ export const projects = [
         description: "Enhanced UI components with Material-UI standards.",
       },
     ],
-    liveDemo: "https://simplay-recpise.netlify.app/",
-    sourceCode: "https://github.com/Ahmedlmansy/SimplyRecipes",
+    live: "https://simplay-recpise.netlify.app/",
+    github: "https://github.com/Ahmedlmansy/SimplyRecipes",
   },
 ];

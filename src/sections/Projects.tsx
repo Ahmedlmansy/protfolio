@@ -1,137 +1,191 @@
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { ArrowDown, ArrowUpRight, Code2, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import { projects } from "@/data/projects";
-import { motion, type Variants } from "framer-motion";
-import { Eye } from "lucide-react";
+import { sectionViewport, useMotionPresets } from "@/lib/motion";
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const imageVariants: Variants = {
-  hidden: { scale: 1.1, opacity: 0 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
+const MotionLink = motion.create(Link);
 
 export default function FeaturedProjects() {
+  const motionPresets = useMotionPresets();
+
   return (
-    <section className="min-h-screen py-12 md:py-20 px-4 sm:px-6 lg:px-8" id="projects">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
+    <section id="projects" className="section-wrap">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={sectionViewport}
+        variants={motionPresets.staggerContainer}
+      >
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-10 md:mb-16"
+          variants={motionPresets.staggerItem}
+          className="mb-10 flex flex-col justify-between gap-4 md:mb-14 md:flex-row md:items-end"
         >
-          <h3 className="text-blue-500 text-sm font-bold uppercase tracking-wider mb-4">
-            PORTFOLIO
-          </h3>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-            Featured Projects
-          </h2>
+          <div>
+            <p className="eyebrow mb-3 flex items-center gap-3">
+              <span className="h-px w-7 bg-primary" />
+              Selected work
+            </p>
+            <h2 className="font-display text-3xl font-semibold tracking-[-0.035em] text-foreground sm:text-4xl">
+              Projects in practice
+            </h2>
+          </div>
+          <p className="max-w-lg text-sm leading-7 text-muted-foreground sm:text-base">
+            A selection of web applications spanning e-commerce, education, analytics, and document workflows.
+          </p>
         </motion.div>
 
-        {/* Projects Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              whileHover={{ y: -10 }}
-              className="bg-gradient-to-b from-slate-900/50 to-slate-800/30
-                         border border-slate-700/50 rounded-2xl overflow-hidden
-                         hover:border-blue-500/30 transition-all duration-300 group"
-            >
-              {/* Image */}
-              <motion.div
-                variants={imageVariants}
-                className="h-48 sm:h-56 relative overflow-hidden"
+        <div className="space-y-6 lg:space-y-8">
+          {projects.map((project, index) => {
+            const reverseLayout = index % 2 === 1;
+            return (
+              <motion.article
+                key={project.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={sectionViewport}
+                variants={motionPresets.staggerContainer}
+                whileHover={motionPresets.reduceMotion ? undefined : { y: -3 }}
+                className="group overflow-hidden rounded-2xl border border-border bg-surface-low shadow-xl shadow-black/10 transition-colors hover:border-primary/25"
               >
-                <motion.img
-                  src={project.mainImage}
-                  alt={project.title}
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ duration: 0.4 }}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/10 transition-all" />
-              </motion.div>
-
-              {/* Info */}
-              <div className="p-6 sm:p-8 space-y-4">
-                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-400 text-sm sm:text-base">
-                  {project.description}
-                </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {project.tags.map((tag, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: i * 0.05 }}
-                      viewport={{ once: true }}
-                      className="px-3 py-1 bg-blue-600/20 border border-blue-500/30
-                                 rounded-md text-blue-300 text-xs font-medium"
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
-                </div>
-
-                {/* Button */}
-                <motion.div whileHover={{ scale: 1.03 }}>
-                  <Button
-                    className="w-full bg-slate-800/50 hover:bg-blue-600
-                                     text-white border border-slate-700
-                                     hover:border-blue-500 py-6 rounded-lg
-                                     flex items-center justify-center gap-2"
+                <div className="grid items-stretch lg:grid-cols-2">
+                  <motion.div
+                    variants={motionPresets.scaleIn}
+                    className={`relative min-h-64 overflow-hidden bg-surface-lowest sm:min-h-80 ${
+                      reverseLayout ? "lg:order-2" : ""
+                    }`}
                   >
-                    <a
-                      href={`/projects/${index}`}
-                      className="flex items-center gap-2"
-                    >
-                      <Eye className="w-4 h-4" />
-                      View Project Details
-                    </a>
-                  </Button>
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      aria-label={`View ${project.title} details`}
+                      className="absolute inset-0 z-10 focus-visible:outline-offset-[-4px]"
+                    />
+                    <motion.img
+                      src={project.image}
+                      alt={`${project.title} project preview`}
+                      loading="lazy"
+                      whileHover={motionPresets.reduceMotion ? undefined : { scale: 1.025 }}
+                      transition={{ duration: motionPresets.reduceMotion ? 0 : 0.4, ease: "easeOut" }}
+                      className="h-full min-h-64 w-full object-cover object-top sm:min-h-80"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/75 via-background/5 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-background/15" />
+                    <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-md border border-white/10 bg-background/80 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-wider text-foreground backdrop-blur-md">
+                      <span className="text-primary-light">{String(index + 1).padStart(2, "0")}</span>
+                      <span>/</span>
+                      {project.category}
+                    </div>
+                    {project.featured && (
+                      <span className="pointer-events-none absolute bottom-4 left-4 rounded-md border border-secondary/25 bg-background/80 px-3 py-1.5 font-mono text-[0.58rem] uppercase tracking-wider text-secondary backdrop-blur-md">
+                        Featured project
+                      </span>
+                    )}
+                  </motion.div>
+
+                  <motion.div
+                    variants={motionPresets.staggerContainer}
+                    className={`flex flex-col justify-center p-5 sm:p-7 lg:p-9 ${
+                      reverseLayout ? "lg:order-1" : ""
+                    }`}
+                  >
+                    <motion.div variants={motionPresets.staggerItem} className="flex flex-wrap items-center gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full border border-tertiary/20 bg-tertiary/10 px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-wider text-tertiary"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      <span className="font-mono text-[0.58rem] text-muted-foreground">
+                        {project.version}
+                      </span>
+                    </motion.div>
+                    <motion.h3 variants={motionPresets.staggerItem} className="mt-4 font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                      {project.title}
+                    </motion.h3>
+                    <motion.p variants={motionPresets.staggerItem} className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
+                      {project.shortDescription}
+                    </motion.p>
+
+                    <motion.div variants={motionPresets.staggerItem} className="mt-5 border-l-2 border-primary/60 pl-3">
+                      <p className="font-mono text-[0.58rem] uppercase tracking-wider text-primary-light">
+                        Contribution · {project.role}
+                      </p>
+                      <p className="mt-1 text-sm leading-6 text-foreground/85">
+                        {project.contribution}
+                      </p>
+                    </motion.div>
+
+                    <motion.div variants={motionPresets.staggerContainer} className="mt-5 flex flex-wrap gap-2">
+                      {project.technologies.slice(0, 5).map((technology) => (
+                        <motion.span
+                          key={technology.name}
+                          variants={motionPresets.staggerItem}
+                          whileHover={motionPresets.reduceMotion ? undefined : { y: -2 }}
+                          className="rounded-md bg-surface-container px-2.5 py-1.5 font-mono text-[0.62rem] text-muted-foreground"
+                        >
+                          {technology.name}
+                        </motion.span>
+                      ))}
+                      {project.technologies.length > 5 && (
+                        <span className="rounded-md bg-surface-container px-2.5 py-1.5 font-mono text-[0.62rem] text-muted-foreground">
+                          +{project.technologies.length - 5}
+                        </span>
+                      )}
+                    </motion.div>
+
+                    <motion.div variants={motionPresets.staggerItem} className="mt-7 flex flex-wrap items-center gap-2 border-t border-border pt-5">
+                      <MotionLink
+                        to={`/projects/${project.slug}`}
+                        whileHover={motionPresets.reduceMotion ? undefined : { y: -2 }}
+                        whileTap={motionPresets.tapPress}
+                        className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary-light"
+                      >
+                        View case study
+                        <ArrowUpRight size={15} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </MotionLink>
+                      <motion.a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        whileHover={motionPresets.hoverLift}
+                        whileTap={motionPresets.tapPress}
+                        className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-border bg-surface-container px-3.5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-surface-high"
+                        aria-label={`${project.title} source code on GitHub`}
+                      >
+                        <Code2 size={15} aria-hidden="true" />
+                        GitHub
+                      </motion.a>
+                      <motion.a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        whileHover={motionPresets.hoverLift}
+                        whileTap={motionPresets.tapPress}
+                        className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-border px-3.5 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-surface-container hover:text-foreground"
+                        aria-label={`${project.title} live demo`}
+                      >
+                        <ExternalLink size={14} aria-hidden="true" />
+                        Live demo
+                      </motion.a>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        <motion.div variants={motionPresets.staggerItem} className="mt-8 flex justify-center">
+          <a
+            href="#experience"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+          >
+            More about my work
+            <ArrowDown size={14} aria-hidden="true" />
+          </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
